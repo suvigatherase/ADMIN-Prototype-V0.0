@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import LoginPage from "./Login/LoginPage";
+import LoginWithFormik from "./Login/LoginWithFormik";
+import UserInfo from "./Login/UserInfo";
+import { useState } from "react";
 function App() {
+  const [view, setView] = useState("basic");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  function handleLogin(status) {
+    console.log(status, "handleLogin-APP");
+    setIsLoggedIn(status === 200 ? true : false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* {!isLoggedIn && <LoginWithFormik handleLogin={handleLogin} />} */}
+      {!isLoggedIn && <LoginPage handleLogin={handleLogin} />}
+      {/* {isLoggedIn && <UserInfo />} */}
     </div>
   );
 }
